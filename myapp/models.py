@@ -8,8 +8,14 @@ class ObraSocial(models.Model):
     def __str__(self):
         return self.nombre
     
+    class Meta:
+        verbose_name_plural = "Obras Sociales"
+    
 class MetodoPago(models.Model):
     metodo= models.CharField(max_length=10)
+    
+    class Meta:
+        verbose_name_plural = "Metodos de pago"
     
 class Cliente (models.Model):
     dni= models.IntegerField(primary_key=True)
@@ -23,17 +29,29 @@ class CuentaParticular(models.Model):
     cliente= models.ForeignKey(Cliente, on_delete=models.CASCADE)
     saldo= models.CharField(max_length=15)
     
+    class Meta:
+        verbose_name_plural = "Cuentas Particulares"
+    
 class Laboratorio(models.Model):
     nombre= models.CharField(max_length=45)
     
 class CompuestoGenerico(models.Model):
     nombre= models.CharField(max_length=45)
     
+    class Meta:
+        verbose_name_plural = "Compuestos Genericos"
+    
 class MarcaComercial(models.Model):
     nombre= models.CharField(max_length=45)
     
+    class Meta:
+        verbose_name_plural = "Marcas Comerciales"
+    
 class PresentacionMedicamento(models.Model):
     tipo= models.CharField(max_length=25)
+    
+    class Meta:
+        verbose_name_plural = "Presentacion del medicamento"
 
 class Medicamento(models.Model):
     marca_comercial= models.ForeignKey(MarcaComercial, on_delete=models.CASCADE)
@@ -49,9 +67,15 @@ class Proveedor(models.Model):
     telefono= models.IntegerField(null=True)
     direccion= models.CharField(max_length=30)
     
+    class Meta:
+        verbose_name_plural = "Proveedores"
+    
 class StockProveedor(models.Model):
     proveedor= models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     medicamento= models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    
+    class Meta:
+        verbose_name_plural = "Stock de proveedores"
     
 class Venta(models.Model):
     cliente= models.ForeignKey(Cliente, on_delete=models.CASCADE)
